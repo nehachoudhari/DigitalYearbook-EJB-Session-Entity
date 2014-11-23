@@ -54,7 +54,7 @@ public class Student implements Serializable{
 	@Column(name="EMAIL")
 	private String email;
 	
-	@OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY) 
+	//@OneToOne(mappedBy = "Student", fetch = FetchType.LAZY) 
 	Photograph photograph;
 	
 	public Photograph getPhotograph() {
