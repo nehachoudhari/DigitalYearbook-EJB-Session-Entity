@@ -17,7 +17,7 @@ public class StudentServiceImpl implements StudentService{
 	 @PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;
 	 
-	public String addStudent(long buckId, String contactNumber, int deptId, String dob, String email,
+	public boolean addStudent(long buckId, String contactNumber, int deptId, String dob, String email,
 			String firstName, String gradYear, String jobInternDetails, String lastName,
 			  String password, String username, Photograph photo) throws YearbookException{
 		Student student = new Student();
@@ -33,6 +33,7 @@ public class StudentServiceImpl implements StudentService{
 			student.setLastName(lastName);
 			student.setPassword(password);
 			student.setUsername(username);
+			student.setPhotograph(photo);
 			em.getTransaction().begin();
 			em.persist(student);
 			//em.flush();
@@ -40,17 +41,17 @@ public class StudentServiceImpl implements StudentService{
 		}
 		catch(EntityExistsException e)
 		{
-			return "Exists";
+			return false;
 		}
 		
 		catch(ConstraintViolationException e)
 		{
-			return "Exists";
+			return false;
 		}
 		catch(Exception e){
 			throw new YearbookException(e.getLocalizedMessage());
 		}
-		return "success";
+		return true;
 	}
 
 	@Override
