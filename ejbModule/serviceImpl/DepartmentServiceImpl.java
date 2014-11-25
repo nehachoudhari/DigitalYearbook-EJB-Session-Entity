@@ -1,16 +1,19 @@
 package serviceImpl;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.ConstraintViolationException;
 
 import service.DepartmentService;
 import entity.Department;
 import entity.Photograph;
+import entity.Student;
 import exception.YearbookException;
 
 @Stateless
@@ -92,4 +95,13 @@ public class DepartmentServiceImpl implements DepartmentService{
 		}
 	}
  	
+	public Collection<Department> getAllDepartments() throws YearbookException{
+		  Query query = em.createQuery("SELECT d FROM Department d");
+		   try{
+			   return (Collection<Department>) query.getResultList();
+		   }
+		   catch (Exception e) {
+			   throw new YearbookException("Error occured while fetching all departments");
+		   }
+	}
 }

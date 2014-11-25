@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Collection;
 import java.util.List;
 
 import entity.Department;
@@ -13,6 +14,9 @@ public interface DepartmentService {
 	
 	public boolean updateDepartment(int deptId, String location, String mission, String name, String url, Photograph photo) throws YearbookException;
 	
-	public boolean deleteDepartment(int deptId) throws YearbookException;;
+	public boolean deleteDepartment(int deptId) throws YearbookException;
+	
+	public Collection<Department> getAllDepartments() throws YearbookException;
+	
 	
 }

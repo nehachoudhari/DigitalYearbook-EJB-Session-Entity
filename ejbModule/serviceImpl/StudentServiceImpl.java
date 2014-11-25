@@ -1,6 +1,10 @@
 package serviceImpl;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -150,5 +154,15 @@ public class StudentServiceImpl implements StudentService{
 		
 	}
 
+	public Collection<Student> getAllStudents() throws YearbookException {
+		   Query query = em.createQuery("SELECT s FROM Student s");
+		   try{
+			   return (Collection<Student>) query.getResultList();
+		   }
+		   catch (Exception e) {
+			   throw new YearbookException("Error occured while fetching all students");
+		   }
+		
+	}
 	
 }

@@ -1,15 +1,20 @@
 package serviceImpl;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.mockito.internal.stubbing.answers.Returns;
 
 import service.EventService;
 import entity.Event;
 import entity.Photograph;
+import entity.Student;
 import exception.YearbookException;
 
 public class EventServiceImpl extends ParentAbstract implements EventService{
@@ -126,5 +131,15 @@ public class EventServiceImpl extends ParentAbstract implements EventService{
 						throw new YearbookException("Error in retrieving event information, eventId: "+ eventId+" message: "+ex.getLocalizedMessage() );
 					}
 				}
+	}
+	
+	public Collection<Event> getAllEvents() throws YearbookException {
+		  Query query = em.createQuery("SELECT e FROM Event e");
+		   try{
+			   return (Collection<Event>) query.getResultList();
+		   }
+		   catch (Exception e) {
+			   throw new YearbookException("Error occured while fetching all events");
+		   }
 	}
 }
