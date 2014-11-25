@@ -1,6 +1,7 @@
 package entity;
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,7 +55,7 @@ public class Student implements Serializable{
 	@Column(name="EMAIL")
 	private String email;
 	
-	//@OneToOne(mappedBy = "Student", fetch = FetchType.LAZY) 
+	@OneToOne(mappedBy = "Student", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE) 
 	Photograph photograph;
 	
 	public Photograph getPhotograph() {
