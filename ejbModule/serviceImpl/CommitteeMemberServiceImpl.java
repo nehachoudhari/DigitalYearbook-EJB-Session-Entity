@@ -1,5 +1,6 @@
 package serviceImpl;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
@@ -10,6 +11,7 @@ import javax.validation.ConstraintViolationException;
 
 import service.CommitteeMemberService;
 import entity.CommitteeMember;
+import entity.Department;
 import entity.Event;
 import entity.Photograph;
 import exception.YearbookException;
@@ -24,8 +26,8 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	}
 	
 	@Override
-	public String addMember(int memberId, String fName, String lName, String designation
-			, int deptId)
+	public boolean addMember(String fName, String lName, String designation
+			, int deptId, String photoUrl)
 			throws YearbookException {
 		CommitteeMember member = new CommitteeMember();
 		try{
@@ -33,38 +35,49 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 			member.setDesignation(designation);
 			member.setfName(fName);
 			member.setlName(lName);
-			member.setMember_id(memberId);
+			member.setPhoto(photoUrl);
 		
 			em.persist(member);
 			em.flush();
 		}
 		catch(EntityExistsException e)
 		{
-			return "Exists";
+			return false;
 		}
 		
 		catch(ConstraintViolationException e)
 		{
-			return "Exists";
+			return false;
 		}
 		catch(Exception e){
 			throw new YearbookException("Some error occurred while adding Department..");
 		}
-		return "success";
+		return true;
 		
 	}
 
 	@Override
-	public void updateMember(Event event, List<Photograph> photoList)
-			throws YearbookException {
+	public boolean updateMember(int memberId, String fName, String lName,
+			String designation, int deptId,  String photoUrl) throws YearbookException {
 		
-		
+		Query query = em.createQuery("Update COMMITTEE_MEMBER c WHERE c.MEMBER_ID = :id");
+		int deletedCount = query.setParameter("id", memberId).executeUpdate();	
+		if(deletedCount>0){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public void deleteMember(int memberId) throws YearbookException {
+	public boolean deleteMember(int memberId) throws YearbookException {
 		Query query = em.createQuery("DELETE FROM COMMITTEE_MEMBER c WHERE c.MEMBER_ID = :id");
-			  int deletedCount = query.setParameter("id", memberId).executeUpdate();			 
+		int deletedCount = query.setParameter("id", memberId).executeUpdate();	
+		if(deletedCount>0){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -83,6 +96,17 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 		else {
 			throw new YearbookException("No committee member with id " + memberId);
 		}
+	}
+	
+	
+	public Collection<CommitteeMember> getAllCommitteeMembers() throws YearbookException {
+		 Query query = em.createQuery("SELECT c FROM COMMITTEE_MEMBER c");
+		   try{
+			   return (Collection<CommitteeMember>) query.getResultList();
+		   }
+		   catch (Exception e) {
+			   throw new YearbookException("Error occured while fetching all committee members");
+		   }
 	}
 
 }

@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Collection;
 import java.util.List;
 
 import entity.Department;
@@ -16,6 +17,7 @@ public interface ReasearchGroupService {
 	public boolean updateResearchGroup(int groupId, String name, String description, String url, Photograph photo) throws YearbookException;
 	
 	public boolean deleteReseachGroup(int groupId) throws YearbookException;
-	
 
+	public Collection<ResearchGroup> getAllResearchGroups() throws YearbookException;
+	
 }

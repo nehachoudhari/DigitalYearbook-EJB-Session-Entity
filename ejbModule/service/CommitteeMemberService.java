@@ -10,11 +10,13 @@ public interface CommitteeMemberService {
 
 	//TODO change everything
 
-	public void updateMember(Event event, List<Photograph> photoList) throws YearbookException;
+	public boolean updateMember(int memberId, String fName, String lName,
+			String designation, int deptId,  String photoUrl) throws YearbookException;
 	
 	
-	String addMember(int memberId, String fName, String lName,
-			String designation, int deptId) throws YearbookException;
+	public boolean addMember(String fName, String lName,
+			String designation, int deptId,  String photoUrl) throws YearbookException;
 
-	void deleteMember(int memberId) throws YearbookException;
+	public boolean deleteMember(int memberId) throws YearbookException;
+	
 }

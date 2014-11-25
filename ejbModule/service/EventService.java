@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Collection;
 import java.util.List;
 
 import entity.Event;
@@ -15,4 +16,6 @@ public interface EventService{
 	public Event getEvent (long eventId) throws YearbookException;
 	
 	public boolean deleteEvent(long eventId) throws YearbookException;
+	
+	public Collection<Event> getAllEvents() throws YearbookException;
 }
