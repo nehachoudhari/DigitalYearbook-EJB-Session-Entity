@@ -4,7 +4,6 @@
 	   <jta-data-source>java:jboss/datasources/ExampleYearbook</jta-data-source>
 	   <class>entity.Department</class>
 	   	   <class>entity.Student</class>
-	   	   <class>entity.Photograph</class>
 	   
 	   <properties>
 	   
