@@ -23,7 +23,7 @@ public class StudentServiceImpl implements StudentService{
 	 
 	public boolean addStudent(long buckId, String contactNumber, int deptId, String dob, String email,
 			String firstName, String gradYear, String jobInternDetails, String lastName,
-			  String password, String username, Photograph photo) throws YearbookException{
+			  String password, String username, String url) throws YearbookException{
 		Student student = new Student();
 		try{
 			student.setBuckId(buckId);
@@ -37,7 +37,7 @@ public class StudentServiceImpl implements StudentService{
 			student.setLastName(lastName);
 			student.setPassword(password);
 			student.setUsername(username);
-			student.setPhotograph(photo);
+			student.setUrl(url);
 			em.getTransaction().begin();
 			em.persist(student);
 			//em.flush();
@@ -61,7 +61,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public boolean updateStudent(long buckId, String contactNumber, int deptId, String dob, String email,
 			String firstName, String gradYear, String jobInternDetails, String lastName, String password,
-			String username, Photograph photo) throws YearbookException {
+			String username, String url) throws YearbookException {
 		
 		Student student = null;
 		
@@ -86,7 +86,7 @@ public class StudentServiceImpl implements StudentService{
 			student.setUsername(username);
 			student.setPassword(password);
 			
-			student.setPhotograph(photo);
+			student.setUrl(url);
 			
 			em.getTransaction().commit();
 			

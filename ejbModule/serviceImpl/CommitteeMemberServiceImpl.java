@@ -35,7 +35,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 			member.setDesignation(designation);
 			member.setfName(fName);
 			member.setlName(lName);
-			member.setPhoto(photoUrl);
+			member.setUrl(photoUrl);
 		
 			em.persist(member);
 			em.flush();

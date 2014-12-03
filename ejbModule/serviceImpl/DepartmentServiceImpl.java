@@ -21,7 +21,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 	@PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;
 	
- 	public boolean addDepartment(int deptId, String location, String mission, String name, String url, List<Photograph> photoList)
+ 	public boolean addDepartment(int deptId, String location, String mission, String name, String url, String photoUrl)
 	throws YearbookException{
 		Department dept = new Department();
 		try{
@@ -30,6 +30,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			dept.setMission(mission);
 			dept.setName(name);
 			dept.setUrl(url);
+			dept.setPhotoUrl(photoUrl);
 			em.persist(dept);
 			em.flush();
 		}
@@ -63,7 +64,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 		
 	}
 	
-	public boolean updateDepartment(int deptId, String location, String mission, String name, String url, Photograph photo) throws YearbookException {
+	public boolean updateDepartment(int deptId, String location, String mission, String name, String url, String photoUrl) throws YearbookException {
 		Department dept = null;
 		try{
 			dept = em.find(Department.class, deptId);
@@ -74,7 +75,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			dept.setMission(mission);
 			dept.setName(name);
 			dept.setUrl(url);
-			dept.setPhoto(photo);
+			dept.setPhotoUrl(photoUrl);
 			return true;
 		}catch(Exception e) {
 			throw new YearbookException("Some error occurred while updating Department with id " + deptId);

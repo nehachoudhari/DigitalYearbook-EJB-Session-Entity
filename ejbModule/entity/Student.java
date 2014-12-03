@@ -55,14 +55,14 @@ public class Student implements Serializable{
 	@Column(name="EMAIL")
 	private String email;
 	
-	@OneToOne(mappedBy = "Student", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE) 
-	Photograph photograph;
+	@Column(name="URL")
+	private String url;
 	
-	public Photograph getPhotograph() {
-		return photograph;
+	public String getUrl() {
+		return url;
 	}
-	public void setPhotograph(Photograph photograph) {
-		this.photograph = photograph;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public String getEmail() {
 		return email;

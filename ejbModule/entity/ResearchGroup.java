@@ -1,6 +1,15 @@
 package entity;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -13,13 +22,32 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="RESEARCH_GROUP")
-public class ResearchGroup{
+public class ResearchGroup implements Serializable{
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="GROUP_ID")
 	private int groupId;
+	
+	@Column(name="NAME")
 	private String name;
+	
+	@Column(name="DESCRIPTION")
 	private String description;
-	private Photograph photo;
+	
+	@Column(name="URL")
 	private String url;
+	
+
+	@Column(name="PHOTO_URL")
+	private String photoUrl;
+	
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
 	public int getGroupId() {
 		return groupId;
 	}
@@ -37,12 +65,6 @@ public class ResearchGroup{
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public Photograph getPhoto() {
-		return photo;
-	}
-	public void setPhoto(Photograph photo) {
-		this.photo = photo;
 	}
 	public String getUrl() {
 		return url;

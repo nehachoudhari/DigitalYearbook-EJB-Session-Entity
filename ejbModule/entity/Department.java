@@ -37,6 +37,17 @@ public class Department {
 	@Column(name="URL")
 	private String url;
 	
+
+	@Column(name="PHOTO_URL")
+	private String photoUrl;
+	
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
+	/**
 	@JoinTable(name="DEPT_PHOTO_REF", joinColumns= @JoinColumn(name="TYPE_ID", referencedColumnName = "ID"))
 	@OneToOne(cascade=CascadeType.REMOVE)
 	private Photograph photo;
@@ -46,7 +57,8 @@ public class Department {
 	}
 	public void setPhoto(Photograph photo) {
 		this.photo = photo;
-	}
+	}**/
+	
 	public String getLocation() {
 		return location;
 	}

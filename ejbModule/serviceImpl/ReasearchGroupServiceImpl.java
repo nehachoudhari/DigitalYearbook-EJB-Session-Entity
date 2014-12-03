@@ -6,25 +6,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entity.Department;
-import entity.Photograph;
+import service.ReasearchGroupService;
 import entity.ResearchGroup;
-import entity.Student;
 import exception.YearbookException;
 
-public class ReasearchGroupServiceImpl {
+public class ReasearchGroupServiceImpl implements ReasearchGroupService{
 
 	@PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;
 	
-	public boolean addResearchGroup(String name, String description, String url, Photograph photo) throws YearbookException {
+	public boolean addResearchGroup(String name, String description, String url, String photoUrl) throws YearbookException {
 		ResearchGroup group = null;
 		try{
 			group = new ResearchGroup();
 		
 			group.setName(name);
 			group.setUrl(url);
-			group.setPhoto(photo);
+			group.setPhotoUrl(photoUrl);
 			group.setDescription(description);
 			em.persist(group);
 			em.flush();
@@ -48,7 +46,7 @@ public class ReasearchGroupServiceImpl {
 		}
 	}
 	
-	public boolean updateResearchGroup(int groupId, String name, String description, String url, Photograph photo) throws YearbookException{
+	public boolean updateResearchGroup(int groupId, String name, String description, String url, String photoUrl) throws YearbookException{
 		ResearchGroup group = null;
 		try{
 			group = em.find(ResearchGroup.class, groupId);
@@ -57,7 +55,7 @@ public class ReasearchGroupServiceImpl {
 			}
 			group.setName(name);
 			group.setUrl(url);
-			group.setPhoto(photo);
+			group.setPhotoUrl(photoUrl);
 			group.setDescription(description);
 			return true;
 		}catch(Exception e) {

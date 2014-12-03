@@ -33,15 +33,16 @@ public class CommitteeMember {
 	@Column(name="DEPT_ID")
 	private int deptId;
 	
-	@Column(name="PHOTO_URL")
-	private String photo;
+	@Column(name="URL")
+	private String url;
 	
-	public String getPhoto() {
-		return photo;
+
+	public String getUrl() {
+		return url;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public long getMember_id() {
