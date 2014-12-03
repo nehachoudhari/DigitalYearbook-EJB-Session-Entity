@@ -1,18 +1,16 @@
 package serviceImpl;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.ConstraintViolationException;
 
 import service.StudentService;
-import entity.Photograph;
 import entity.Student;
 import exception.YearbookException;
 
@@ -37,7 +35,7 @@ public class StudentServiceImpl implements StudentService{
 			student.setLastName(lastName);
 			student.setPassword(password);
 			student.setUsername(username);
-			student.setUrl(url);
+			student.setPhotoUrl(url);
 			em.getTransaction().begin();
 			em.persist(student);
 			//em.flush();
@@ -86,7 +84,7 @@ public class StudentServiceImpl implements StudentService{
 			student.setUsername(username);
 			student.setPassword(password);
 			
-			student.setUrl(url);
+			student.setPhotoUrl(url);
 			
 			em.getTransaction().commit();
 			

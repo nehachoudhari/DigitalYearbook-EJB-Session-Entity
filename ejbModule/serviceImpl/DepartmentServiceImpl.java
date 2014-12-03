@@ -1,7 +1,6 @@
 package serviceImpl;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
@@ -12,8 +11,6 @@ import javax.validation.ConstraintViolationException;
 
 import service.DepartmentService;
 import entity.Department;
-import entity.Photograph;
-import entity.Student;
 import exception.YearbookException;
 
 @Stateless

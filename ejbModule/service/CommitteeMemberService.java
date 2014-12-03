@@ -1,9 +1,5 @@
 package service;
 
-import java.util.List;
-
-import entity.Event;
-import entity.Photograph;
 import exception.YearbookException;
 
 public interface CommitteeMemberService {

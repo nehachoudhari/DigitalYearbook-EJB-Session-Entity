@@ -55,14 +55,15 @@ public class Student implements Serializable{
 	@Column(name="EMAIL")
 	private String email;
 	
-	@Column(name="URL")
-	private String url;
+	@Column(name="PHOTO_URL")
+	private String photoUrl;
 	
-	public String getUrl() {
-		return url;
+	
+	public String getPhotoUrl() {
+		return photoUrl;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 	public String getEmail() {
 		return email;

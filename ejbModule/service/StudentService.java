@@ -1,9 +1,7 @@
 package service;
 
 import java.util.Collection;
-import java.util.List;
 
-import entity.Photograph;
 import entity.Student;
 import exception.YearbookException;
 

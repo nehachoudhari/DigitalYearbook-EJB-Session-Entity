@@ -1,10 +1,8 @@
 package service;
 
 import java.util.Collection;
-import java.util.List;
 
 import entity.Department;
-import entity.Photograph;
 import exception.YearbookException;
 
 public interface DepartmentService {

@@ -4,14 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import entity.Event;
-import entity.Photograph;
 import exception.YearbookException;
 
 public interface EventService{
 	
-	public boolean addEvent(String eventName, String description, String date, String url, List<Photograph> photoList) throws YearbookException;
+	public boolean addEvent(String eventName, String description, String date, String url, String photoUrl) throws YearbookException;
 
-	public boolean updateEvent(long eventId, String eventName, String description, String date, String url, List<Photograph> photoList) throws YearbookException;
+	public boolean updateEvent(long eventId, String eventName, String description, String date, String url, String photoUrl) throws YearbookException;
 	
 	public Event getEvent (long eventId) throws YearbookException;
 	

@@ -9,12 +9,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.mockito.internal.stubbing.answers.Returns;
-
 import service.EventService;
 import entity.Event;
-import entity.Photograph;
-import entity.Student;
 import exception.YearbookException;
 
 public class EventServiceImpl extends ParentAbstract implements EventService{
@@ -24,7 +20,7 @@ public class EventServiceImpl extends ParentAbstract implements EventService{
 	 
 	
 	@Override
-	public boolean addEvent(String eventName, String description, String date, String url, List<Photograph> photoList)
+	public boolean addEvent(String eventName, String description, String date, String url, String photoUrl)
 			throws YearbookException {
 		
 		Event event = new Event();
@@ -53,7 +49,7 @@ public class EventServiceImpl extends ParentAbstract implements EventService{
 	}
 
 	@Override
-	public boolean updateEvent(long eventId, String eventName, String description, String date, String url, List<Photograph> photoList)
+	public boolean updateEvent(long eventId, String eventName, String description, String date, String url, String photoUrl)
 			throws YearbookException {
 		
 		Event event = null;

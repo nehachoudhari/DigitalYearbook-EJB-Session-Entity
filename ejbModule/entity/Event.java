@@ -41,7 +41,17 @@ public class Event implements Serializable{
 	@Column(name="EVENT_ID")
 	private long eventId;
 	
+
+	@Column(name="PHOTO_URL")
+	private String photoUrl;
 	
+	
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
 	public String getName() {
 		return name;
 	}

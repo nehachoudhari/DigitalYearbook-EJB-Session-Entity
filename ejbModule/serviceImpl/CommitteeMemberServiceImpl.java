@@ -11,9 +11,6 @@ import javax.validation.ConstraintViolationException;
 
 import service.CommitteeMemberService;
 import entity.CommitteeMember;
-import entity.Department;
-import entity.Event;
-import entity.Photograph;
 import exception.YearbookException;
 
 public class CommitteeMemberServiceImpl implements CommitteeMemberService{
@@ -35,7 +32,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 			member.setDesignation(designation);
 			member.setfName(fName);
 			member.setlName(lName);
-			member.setUrl(photoUrl);
+			member.setPhotoUrl(photoUrl);
 		
 			em.persist(member);
 			em.flush();
