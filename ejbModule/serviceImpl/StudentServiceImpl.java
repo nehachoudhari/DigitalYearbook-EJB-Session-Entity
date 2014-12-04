@@ -171,6 +171,7 @@ public class StudentServiceImpl implements StudentService{
 		try{
 			Collection<Student> students = (Collection<Student>) query.getResultList();
 			if(!students.isEmpty() && students.size()==1){
+				System.out.println("There is user!!");
 				return true;
 			}
 		}catch (Exception e) {
