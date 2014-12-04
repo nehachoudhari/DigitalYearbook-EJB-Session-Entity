@@ -3,6 +3,7 @@ package serviceImpl;
 import java.util.Collection;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,14 +14,16 @@ import service.CommitteeMemberService;
 import entity.CommitteeMember;
 import exception.YearbookException;
 
+
+@Stateless
 public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 
 	 @PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;
 	
-	public CommitteeMemberServiceImpl(EntityManager em) {
-		this.em = em;
-	}
+//	public CommitteeMemberServiceImpl(EntityManager em) {
+//		this.em = em;
+//	}
 	
 	@Override
 	public boolean addMember(String fName, String lName, String designation
