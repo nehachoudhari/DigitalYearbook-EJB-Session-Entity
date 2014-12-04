@@ -42,6 +42,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			return false;
 		}
 		catch(Exception e){
+			System.out.println(e.getMessage());
 			throw new YearbookException("Some error occurred while adding Department..");
 		}
 		return true;
@@ -73,7 +74,9 @@ public class DepartmentServiceImpl implements DepartmentService{
 			dept.setMission(mission);
 			dept.setName(name);
 			dept.setUrl(url);
-			dept.setPhotoUrl(photoUrl);
+			if(photoUrl!=null){
+				dept.setPhotoUrl(photoUrl);
+			}
 			return true;
 		}catch(Exception e) {
 			throw new YearbookException("Some error occurred while updating Department with id " + deptId);
