@@ -27,7 +27,7 @@ public class Event implements Serializable{
 	@Column(name="NAME")
 	private String name;
 	
-	@Column(name="DETAILS")
+	@Column(name="DESCRIPTION")
 	private String description;
 	
 	@Column(name="EVENT_DATE")
