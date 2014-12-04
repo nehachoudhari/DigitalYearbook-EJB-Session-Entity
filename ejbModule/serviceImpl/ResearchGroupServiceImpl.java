@@ -2,6 +2,7 @@ package serviceImpl;
 
 import java.util.Collection;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -10,6 +11,7 @@ import service.ResearchGroupService;
 import entity.ResearchGroup;
 import exception.YearbookException;
 
+@Stateless
 public class ResearchGroupServiceImpl implements ResearchGroupService{
 
 	@PersistenceContext(unitName="digital-yearbook")

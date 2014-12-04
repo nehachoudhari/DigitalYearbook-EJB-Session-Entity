@@ -3,6 +3,7 @@ package serviceImpl;
 import java.util.Collection;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -13,6 +14,7 @@ import service.EventService;
 import entity.Event;
 import exception.YearbookException;
 
+@Stateless
 public class EventServiceImpl extends ParentAbstract implements EventService{
 
 	 @PersistenceContext(unitName="digital-yearbook")
