@@ -36,10 +36,8 @@ public class StudentServiceImpl implements StudentService{
 			student.setPassword(password);
 			student.setUsername(username);
 			student.setPhotoUrl(url);
-			em.getTransaction().begin();
 			em.persist(student);
-			//em.flush();
-			em.getTransaction().commit();
+			em.flush();
 		}
 		catch(EntityExistsException e)
 		{
@@ -161,6 +159,24 @@ public class StudentServiceImpl implements StudentService{
 			   throw new YearbookException("Error occured while fetching all students");
 		   }
 		
+	}
+
+	
+	/**
+	 * @see service.StudentService#login(java.lang.String, java.lang.String)
+	 */
+	public boolean login(String username, String password)
+			throws YearbookException {
+		Query query = em.createQuery("SELECT s FROM Student s where s.username = '"+username+"' and s.password = '"+password+"'");
+		try{
+			Collection<Student> students = (Collection<Student>) query.getResultList();
+			if(!students.isEmpty() && students.size()==1){
+				return true;
+			}
+		}catch (Exception e) {
+			throw new YearbookException("Error occured while fetching all students");
+		}
+		return false;
 	}
 	
 }
