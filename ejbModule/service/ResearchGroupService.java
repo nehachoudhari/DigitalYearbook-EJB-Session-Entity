@@ -5,7 +5,7 @@ import java.util.Collection;
 import entity.ResearchGroup;
 import exception.YearbookException;
 
-public interface ReasearchGroupService {
+public interface ResearchGroupService {
 
 	public boolean addResearchGroup(String name, String description, String url, String photoUrl) throws YearbookException;
 	

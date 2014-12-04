@@ -6,11 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import service.ReasearchGroupService;
+import service.ResearchGroupService;
 import entity.ResearchGroup;
 import exception.YearbookException;
 
-public class ReasearchGroupServiceImpl implements ReasearchGroupService{
+public class ResearchGroupServiceImpl implements ResearchGroupService{
 
 	@PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;

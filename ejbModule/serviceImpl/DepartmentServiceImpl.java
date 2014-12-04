@@ -15,8 +15,9 @@ import exception.YearbookException;
 
 @Stateless
 public class DepartmentServiceImpl implements DepartmentService{
+	
 	@PersistenceContext(unitName="digital-yearbook")
-	 EntityManager em;
+	EntityManager em;
 	
  	public boolean addDepartment(int deptId, String location, String mission, String name, String url, String photoUrl)
 	throws YearbookException{

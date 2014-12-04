@@ -1,10 +1,12 @@
 package service;
 
+import java.util.Collection;
+
+import entity.CommitteeMember;
 import exception.YearbookException;
 
 public interface CommitteeMemberService {
 
-	//TODO change everything
 
 	public boolean updateMember(int memberId, String fName, String lName,
 			String designation, int deptId,  String photoUrl) throws YearbookException;
@@ -15,4 +17,5 @@ public interface CommitteeMemberService {
 
 	public boolean deleteMember(int memberId) throws YearbookException;
 	
+	public Collection<CommitteeMember> getAllCommitteeMembers() throws YearbookException;
 }
