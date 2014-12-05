@@ -1,6 +1,7 @@
 package serviceImpl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
@@ -150,10 +151,10 @@ public class StudentServiceImpl implements StudentService{
 		
 	}
 
-	public Collection<Student> getAllStudents() throws YearbookException {
-		   Query query = em.createQuery("SELECT s FROM Student s");
+	public List<Student> getAllStudents(int deptId) throws YearbookException {
+		   Query query = em.createQuery("SELECT s FROM Student s where s.deptId = " + deptId);
 		   try{
-			   return (Collection<Student>) query.getResultList();
+			   return (List<Student>) query.getResultList();
 		   }
 		   catch (Exception e) {
 			   throw new YearbookException("Error occured while fetching all students");

@@ -98,11 +98,11 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 		}
 	}
 	
-	
-	public Collection<CommitteeMember> getAllCommitteeMembers() throws YearbookException {
-		 Query query = em.createQuery("SELECT c FROM COMMITTEE_MEMBER c");
+	public List<CommitteeMember> getAllCommitteeMembers(int deptId) throws YearbookException {
+		 Query query = em.createQuery("SELECT c FROM CommitteeMember c "
+		 		+ "where c.deptId = "+ deptId);
 		   try{
-			   return (Collection<CommitteeMember>) query.getResultList();
+			   return (List<CommitteeMember>) query.getResultList();
 		   }
 		   catch (Exception e) {
 			   throw new YearbookException("Error occured while fetching all committee members");
