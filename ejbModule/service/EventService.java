@@ -16,5 +16,5 @@ public interface EventService{
 	
 	public boolean deleteEvent(long eventId) throws YearbookException;
 	
-	public Collection<Event> getAllEvents() throws YearbookException;
+	public List<Event> getAllEvents() throws YearbookException;
 }

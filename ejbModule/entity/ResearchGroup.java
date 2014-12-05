@@ -38,10 +38,19 @@ public class ResearchGroup implements Serializable{
 	@Column(name="URL")
 	private String url;
 	
+	@Column(name="DEPT_ID")
+	private int deptId;
 
 	@Column(name="PHOTO_URL")
 	private String photoUrl;
 	
+	
+	public int getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(int deptId) {
+		this.deptId = deptId;
+	}
 	public String getPhotoUrl() {
 		return photoUrl;
 	}

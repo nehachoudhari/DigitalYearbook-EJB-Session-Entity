@@ -17,12 +17,14 @@ import exception.YearbookException;
 
 @Stateless
 public class StudentServiceImpl implements StudentService{
-	 @PersistenceContext(unitName="digital-yearbook")
+	
+	@PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;
 	 
 	public boolean addStudent(long buckId, String contactNumber, int deptId, String dob, String email,
 			String firstName, String gradYear, String jobInternDetails, String lastName,
 			  String password, String username, String url) throws YearbookException{
+		
 		Student student = new Student();
 		try{
 			student.setBuckId(buckId);
@@ -58,7 +60,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public boolean updateStudent(long buckId, String contactNumber, int deptId, String dob, String email,
 			String firstName, String gradYear, String jobInternDetails, String lastName, String password,
-			String username, String url) throws YearbookException {
+			String username, String photoUrl) throws YearbookException {
 		
 		Student student = null;
 		
@@ -69,7 +71,6 @@ public class StudentServiceImpl implements StudentService{
 				throw new EntityNotFoundException();				
 			}
 			
-			em.getTransaction().begin();
 			
 			student.setContactNumber(contactNumber);
 			student.setDeptId(deptId);
@@ -79,13 +80,11 @@ public class StudentServiceImpl implements StudentService{
 			student.setLastName(lastName);
 			student.setGradYear(gradYear);
 			student.setJobInternDetails(jobInternDetails);
-			
 			student.setUsername(username);
 			student.setPassword(password);
-			
-			student.setPhotoUrl(url);
-			
-			em.getTransaction().commit();
+			if(photoUrl != null && photoUrl != "") {
+				student.setPhotoUrl(photoUrl);
+			}
 			
 			return true;
 			
@@ -125,8 +124,7 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public boolean deleteStudent(long buckId) throws YearbookException {
-		// TODO Auto-generated method stub
-		
+	
 		Student student = null;
 		
 		try{
@@ -134,9 +132,7 @@ public class StudentServiceImpl implements StudentService{
 			if(student == null){
 				throw new EntityNotFoundException();
 			}
-			em.getTransaction().begin();
 			em.remove(student);
-			em.getTransaction().commit();
 			return true;
 			
 		}
@@ -152,7 +148,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	public List<Student> getAllStudents(int deptId) throws YearbookException {
-		   Query query = em.createQuery("SELECT s FROM Student s where s.deptId = " + deptId);
+		Query query = em.createQuery("SELECT s FROM Student s where s.deptId = " + deptId);
 		   try{
 			   return (List<Student>) query.getResultList();
 		   }
@@ -162,23 +158,20 @@ public class StudentServiceImpl implements StudentService{
 		
 	}
 
-	
-	/**
-	 * @see service.StudentService#login(java.lang.String, java.lang.String)
-	 */
-	public boolean login(String username, String password)
+	@Override
+	public Student login(String username, String password)
 			throws YearbookException {
 		Query query = em.createQuery("SELECT s FROM Student s where s.username = '"+username+"' and s.password = '"+password+"'");
 		try{
-			Collection<Student> students = (Collection<Student>) query.getResultList();
+			List<Student> students = query.getResultList();
 			if(!students.isEmpty() && students.size()==1){
 				System.out.println("There is user!!");
-				return true;
+				return students.get(0);
 			}
 		}catch (Exception e) {
-			throw new YearbookException("Error occured while fetching all students");
+			throw new YearbookException("An error occured while fetching a student with given username and password");
 		}
-		return false;
+		return null;
 	}
 	
 }
