@@ -1,6 +1,7 @@
 package service;
 
 import java.util.Collection;
+import java.util.List;
 
 import entity.Student;
 import exception.YearbookException;
@@ -19,8 +20,8 @@ public interface StudentService{
 	
 	public boolean deleteStudent(long buckId) throws YearbookException;
 	
-	public Collection<Student> getAllStudents() throws YearbookException;
+	public List<Student> getAllStudents(int deptId) throws YearbookException;
 	
-	public boolean login(String username, String password) throws YearbookException;
+	public Student login(String username, String password) throws YearbookException;
 
 }

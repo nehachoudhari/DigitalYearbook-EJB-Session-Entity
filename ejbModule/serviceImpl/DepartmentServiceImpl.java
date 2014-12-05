@@ -1,6 +1,7 @@
 package serviceImpl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
@@ -43,7 +44,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
-			throw new YearbookException("Some error occurred while adding Department..");
+			throw new YearbookException("An error occurred while adding Department..");
 		}
 		return true;
 	}
@@ -58,7 +59,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			}
 			return dept;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred retriving Department with id " + deptId);
+			throw new YearbookException("An error occurred retriving Department with id " + deptId);
 		}
 		
 	}
@@ -74,12 +75,12 @@ public class DepartmentServiceImpl implements DepartmentService{
 			dept.setMission(mission);
 			dept.setName(name);
 			dept.setUrl(url);
-			if(photoUrl!=null){
+			if(photoUrl != null && photoUrl != ""){
 				dept.setPhotoUrl(photoUrl);
 			}
 			return true;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred while updating Department with id " + deptId);
+			throw new YearbookException("An error occurred while updating Department with id " + deptId);
 		}
 	}
 	
@@ -93,17 +94,17 @@ public class DepartmentServiceImpl implements DepartmentService{
 			em.remove(dept);
 			return true;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred while updating Department with id " + deptId);
+			throw new YearbookException("An error occurred while updating Department with id " + deptId);
 		}
 	}
  	
-	public Collection<Department> getAllDepartments() throws YearbookException{
+	public List<Department> getAllDepartments() throws YearbookException{
 		  Query query = em.createQuery("SELECT d FROM Department d");
 		   try{
-			   return (Collection<Department>) query.getResultList();
+			   return query.getResultList();
 		   }
 		   catch (Exception e) {
-			   throw new YearbookException("Error occured while fetching all departments");
+			   throw new YearbookException("An error occured while fetching all departments");
 		   }
 	}
 }
