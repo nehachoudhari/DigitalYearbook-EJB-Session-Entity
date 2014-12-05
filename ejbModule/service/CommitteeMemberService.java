@@ -1,6 +1,5 @@
 package service;
 
-import java.util.Collection;
 import java.util.List;
 
 import entity.CommitteeMember;
@@ -19,4 +18,6 @@ public interface CommitteeMemberService {
 	public boolean deleteMember(int memberId) throws YearbookException;
 	
 	public List<CommitteeMember> getAllCommitteeMembers(int deptId) throws YearbookException;
+	
+	public CommitteeMember getMember(int memberId) throws YearbookException;
 }
