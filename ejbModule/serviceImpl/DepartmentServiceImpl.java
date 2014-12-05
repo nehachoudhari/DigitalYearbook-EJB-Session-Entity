@@ -1,6 +1,5 @@
 package serviceImpl;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -87,6 +86,12 @@ public class DepartmentServiceImpl implements DepartmentService{
 	public boolean deleteDepartment(int deptId) throws YearbookException {
 		Department dept = null;
 		try{
+			Query query = em.createQuery("DELETE FROM CommitteeMember where deptId = "+deptId);
+			query.executeUpdate();
+			query = em.createQuery("DELETE FROM ResearchGroup where deptId = "+deptId);
+			query.executeUpdate();
+			query = em.createQuery("DELETE FROM Student where deptId = "+deptId);
+			query.executeUpdate();
 			dept = em.find(Department.class, deptId);
 			if(dept == null) {
 				throw new YearbookException("No Department with id " + deptId);
