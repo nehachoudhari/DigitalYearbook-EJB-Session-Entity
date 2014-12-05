@@ -60,7 +60,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	public boolean updateMember(int memberId, String fName, String lName,
 			String designation, int deptId,  String photoUrl) throws YearbookException {
 		
-		Query query = em.createQuery("Update COMMITTEE_MEMBER c WHERE c.MEMBER_ID = :id");
+		Query query = em.createQuery("Update CommitteeMember c WHERE c.MEMBER_ID = :id");
 		int deletedCount = query.setParameter("id", memberId).executeUpdate();	
 		if(deletedCount>0){
 			return true;
@@ -71,7 +71,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 
 	@Override
 	public boolean deleteMember(int memberId) throws YearbookException {
-		Query query = em.createQuery("DELETE FROM COMMITTEE_MEMBER c WHERE c.MEMBER_ID = :id");
+		Query query = em.createQuery("DELETE FROM CommitteeMember c WHERE c.MEMBER_ID = :id");
 		int deletedCount = query.setParameter("id", memberId).executeUpdate();	
 		if(deletedCount>0){
 			return true;
@@ -86,7 +86,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 		List<CommitteeMember> members= null;
 		CommitteeMember  member = null;
 		Query query = em.createNativeQuery
-				("select * from COMMITTEE_MEMBER where MEMBER_ID='" + memberId + "'", CommitteeMember.class);
+				("select * from CommitteeMember where MEMBER_ID='" + memberId + "'", CommitteeMember.class);
 
 		members = query.getResultList();
 		if(!members.isEmpty()){
@@ -100,7 +100,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	
 	
 	public Collection<CommitteeMember> getAllCommitteeMembers() throws YearbookException {
-		 Query query = em.createQuery("SELECT c FROM COMMITTEE_MEMBER c");
+		 Query query = em.createQuery("SELECT c FROM CommitteeMember c");
 		   try{
 			   return (Collection<CommitteeMember>) query.getResultList();
 		   }
