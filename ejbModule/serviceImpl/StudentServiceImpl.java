@@ -71,7 +71,6 @@ public class StudentServiceImpl implements StudentService{
 				throw new EntityNotFoundException();				
 			}
 			
-			em.getTransaction().begin();
 			
 			student.setContactNumber(contactNumber);
 			student.setDeptId(deptId);
@@ -86,7 +85,6 @@ public class StudentServiceImpl implements StudentService{
 			if(photoUrl != null && photoUrl != "") {
 				student.setPhotoUrl(photoUrl);
 			}
-			em.getTransaction().commit();
 			
 			return true;
 			
@@ -134,9 +132,7 @@ public class StudentServiceImpl implements StudentService{
 			if(student == null){
 				throw new EntityNotFoundException();
 			}
-			em.getTransaction().begin();
 			em.remove(student);
-			em.getTransaction().commit();
 			return true;
 			
 		}
