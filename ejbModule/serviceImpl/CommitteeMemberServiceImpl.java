@@ -1,6 +1,5 @@
 package serviceImpl;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -12,7 +11,6 @@ import javax.validation.ConstraintViolationException;
 
 import service.CommitteeMemberService;
 import entity.CommitteeMember;
-import entity.Department;
 import exception.YearbookException;
 
 
