@@ -151,10 +151,10 @@ public class StudentServiceImpl implements StudentService{
 		
 	}
 
-	public Collection<Student> getAllStudents() throws YearbookException {
-		   Query query = em.createQuery("SELECT s FROM Student s");
+	public List<Student> getAllStudents(int deptId) throws YearbookException {
+		   Query query = em.createQuery("SELECT s FROM Student s where s.deptId = deptId").setParameter("deptId", deptId);
 		   try{
-			   return (Collection<Student>) query.getResultList();
+			   return query.getResultList();
 		   }
 		   catch (Exception e) {
 			   throw new YearbookException("Error occured while fetching all students");

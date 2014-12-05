@@ -1,6 +1,7 @@
 package serviceImpl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
@@ -97,10 +98,10 @@ public class DepartmentServiceImpl implements DepartmentService{
 		}
 	}
  	
-	public Collection<Department> getAllDepartments() throws YearbookException{
+	public List<Department> getAllDepartments() throws YearbookException{
 		  Query query = em.createQuery("SELECT d FROM Department d");
 		   try{
-			   return (Collection<Department>) query.getResultList();
+			   return query.getResultList();
 		   }
 		   catch (Exception e) {
 			   throw new YearbookException("An error occured while fetching all departments");
