@@ -18,11 +18,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="EVENT")
 public class Event implements Serializable{
-	/**
-	 * CREATE TABLE IF NOT EXISTS EVENT(EVENT_ID INTEGER AUTO_INCREMENT, NAME VARCHAR2(50) 
-	 * NOT NULL UNIQUE , EVENT_DATE VARCHAR2(10), URL VARCHAR2(200), DETAILS VARCHAR2(100), PRIMARY KEY (EVENT_ID))";
-	 */
-	
 	
 	@Column(name="NAME")
 	private String name;

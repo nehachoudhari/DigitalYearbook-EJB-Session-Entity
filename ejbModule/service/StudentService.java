@@ -21,6 +21,6 @@ public interface StudentService{
 	
 	public Collection<Student> getAllStudents() throws YearbookException;
 	
-	public boolean login(String username, String password) throws YearbookException;
+	public Student login(String username, String password) throws YearbookException;
 
 }

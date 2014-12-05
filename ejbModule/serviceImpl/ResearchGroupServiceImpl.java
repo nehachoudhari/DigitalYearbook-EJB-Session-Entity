@@ -1,6 +1,7 @@
 package serviceImpl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,12 +18,13 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 	@PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;
 	
-	public boolean addResearchGroup(String name, String description, String url, String photoUrl) throws YearbookException {
+	public boolean addResearchGroup(String name, int deptId, String description, String url, String photoUrl) throws YearbookException {
 		ResearchGroup group = null;
 		try{
 			group = new ResearchGroup();
 		
 			group.setName(name);
+			group.setDeptId(deptId);
 			group.setUrl(url);
 			group.setPhotoUrl(photoUrl);
 			group.setDescription(description);
@@ -30,7 +32,7 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 			em.flush();
 			return true;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred while adding the Research Group");
+			throw new YearbookException("An error occurred while adding the Research Group");
 		}
 		
 	}
@@ -44,11 +46,11 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 			}
 			return group;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred while fetching Research Group with id " + groupId);
+			throw new YearbookException("An error occurred while fetching Research Group with id " + groupId);
 		}
 	}
 	
-	public boolean updateResearchGroup(int groupId, String name, String description, String url, String photoUrl) throws YearbookException{
+	public boolean updateResearchGroup(int groupId, String name, int deptId, String description, String url, String photoUrl) throws YearbookException{
 		ResearchGroup group = null;
 		try{
 			group = em.find(ResearchGroup.class, groupId);
@@ -56,12 +58,15 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 				throw new YearbookException("No Research Group with id " + groupId);
 			}
 			group.setName(name);
+			group.setDeptId(deptId);
 			group.setUrl(url);
-			group.setPhotoUrl(photoUrl);
+			if(photoUrl != null && photoUrl != "") {
+				group.setPhotoUrl(photoUrl);	
+			}
 			group.setDescription(description);
 			return true;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred while updating Research Group with id " + groupId);
+			throw new YearbookException("An error occurred while updating Research Group with id " + groupId);
 		}
 	}
 	
@@ -75,18 +80,18 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 			em.remove(group);
 			return true;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred while deleting Research Group with id " + groupId);
+			throw new YearbookException("An error occurred while deleting Research Group with id " + groupId);
 		}
 	}
 	
-	public Collection<ResearchGroup> getAllResearchGroups() throws YearbookException {
+	public List<ResearchGroup> getAllResearchGroups() throws YearbookException {
 		
 		 Query query = em.createQuery("SELECT r FROM ResearchGroup r");
 		   try{
-			   return (Collection<ResearchGroup>) query.getResultList();
+			   return query.getResultList();
 		   }
 		   catch (Exception e) {
-			   throw new YearbookException("Error occured while fetching all students");
+			   throw new YearbookException("An error occured while fetching all research groups");
 		   }
 		
 	}

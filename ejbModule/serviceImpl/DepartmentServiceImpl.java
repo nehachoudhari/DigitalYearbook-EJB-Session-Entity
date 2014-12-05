@@ -43,7 +43,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
-			throw new YearbookException("Some error occurred while adding Department..");
+			throw new YearbookException("An error occurred while adding Department..");
 		}
 		return true;
 	}
@@ -58,7 +58,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			}
 			return dept;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred retriving Department with id " + deptId);
+			throw new YearbookException("An error occurred retriving Department with id " + deptId);
 		}
 		
 	}
@@ -74,12 +74,12 @@ public class DepartmentServiceImpl implements DepartmentService{
 			dept.setMission(mission);
 			dept.setName(name);
 			dept.setUrl(url);
-			if(photoUrl!=null){
+			if(photoUrl != null && photoUrl != ""){
 				dept.setPhotoUrl(photoUrl);
 			}
 			return true;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred while updating Department with id " + deptId);
+			throw new YearbookException("An error occurred while updating Department with id " + deptId);
 		}
 	}
 	
@@ -93,7 +93,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			em.remove(dept);
 			return true;
 		}catch(Exception e) {
-			throw new YearbookException("Some error occurred while updating Department with id " + deptId);
+			throw new YearbookException("An error occurred while updating Department with id " + deptId);
 		}
 	}
  	
@@ -103,7 +103,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			   return (Collection<Department>) query.getResultList();
 		   }
 		   catch (Exception e) {
-			   throw new YearbookException("Error occured while fetching all departments");
+			   throw new YearbookException("An error occured while fetching all departments");
 		   }
 	}
 }

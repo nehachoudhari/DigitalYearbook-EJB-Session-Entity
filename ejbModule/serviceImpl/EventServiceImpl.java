@@ -15,12 +15,11 @@ import entity.Event;
 import exception.YearbookException;
 
 @Stateless
-public class EventServiceImpl extends ParentAbstract implements EventService{
+public class EventServiceImpl implements EventService{
 
 	 @PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;
 	 
-	
 	@Override
 	public boolean addEvent(String eventName, String description, String date, String url, String photoUrl)
 			throws YearbookException {
@@ -31,13 +30,9 @@ public class EventServiceImpl extends ParentAbstract implements EventService{
 			event.setDescription(description);
 			event.setDate(date);
 			event.setUrl(url);
-			
-			em.getTransaction().begin();
+			event.setPhotoUrl(photoUrl);			
 			em.persist(event);
-			em.getTransaction().commit();
-			
-			//TODO : photolist
-			
+			em.flush();
 			return true;
 		}
 		catch(Exception ex){
@@ -55,24 +50,19 @@ public class EventServiceImpl extends ParentAbstract implements EventService{
 			throws YearbookException {
 		
 		Event event = null;
-		
 		try{
 			event = em.find(Event.class, eventId);
 			if(event == null){
 				throw new EntityNotFoundException();
 			}
-			
-			em.getTransaction().begin();
 			event.setName(eventName);
 			event.setDescription(description);
 			event.setDate(date);
 			event.setUrl(url);
-			
-			//TODO : photolist
-			
-			em.getTransaction().commit();
+			if(photoUrl != null && photoUrl != ""){
+				event.setPhotoUrl(photoUrl);
+			}
 			return true;
-			
 		}
 		catch(Exception ex){
 			if(ex.equals(EntityNotFoundException.class)){
@@ -82,8 +72,6 @@ public class EventServiceImpl extends ParentAbstract implements EventService{
 				throw new YearbookException("Error in updating event information, eventId: "+ eventId+" message: "+ex.getLocalizedMessage() );
 			}
 		}
-		
-		
 	}
 
 	@Override
@@ -95,10 +83,7 @@ public class EventServiceImpl extends ParentAbstract implements EventService{
 			if(event == null){
 				throw new EntityNotFoundException();
 			}
-			em.getTransaction().begin();
 			em.remove(event);
-			em.getTransaction().commit();
-			
 			return true;
 		}
 		catch(Exception ex){
@@ -113,22 +98,23 @@ public class EventServiceImpl extends ParentAbstract implements EventService{
 
 	@Override
 	public Event getEvent(long eventId) throws YearbookException {
-				Event event = null;
-				try{
-					event = em.find(Event.class, eventId);
-					if(event == null){
-						throw new EntityNotFoundException();
-					}
-					return event;
-				}
-				catch(Exception ex){
-					if(ex.equals(EntityNotFoundException.class)){
-						throw new YearbookException("Event with eventId:  "+ eventId +" not found");
-					}
-					else{
-						throw new YearbookException("Error in retrieving event information, eventId: "+ eventId+" message: "+ex.getLocalizedMessage() );
-					}
-				}
+	
+		Event event = null;
+		try{
+			event = em.find(Event.class, eventId);
+			if(event == null){
+				throw new EntityNotFoundException();
+			}
+			return event;				
+		}
+		catch(Exception ex){
+			if(ex.equals(EntityNotFoundException.class)){
+				throw new YearbookException("Event with eventId:  "+ eventId +" not found");
+			}
+			else{
+				throw new YearbookException("Error in retrieving event information, eventId: "+ eventId+" message: "+ex.getLocalizedMessage() );
+			}
+		}
 	}
 	
 	public Collection<Event> getAllEvents() throws YearbookException {
