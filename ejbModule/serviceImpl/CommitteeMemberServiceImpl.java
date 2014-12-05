@@ -12,6 +12,7 @@ import javax.validation.ConstraintViolationException;
 
 import service.CommitteeMemberService;
 import entity.CommitteeMember;
+import entity.Department;
 import exception.YearbookException;
 
 
@@ -20,11 +21,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 
 	 @PersistenceContext(unitName="digital-yearbook")
 	 EntityManager em;
-	
-//	public CommitteeMemberServiceImpl(EntityManager em) {
-//		this.em = em;
-//	}
-	
+
 	@Override
 	public boolean addMember(String fName, String lName, String designation
 			, int deptId, String photoUrl)
@@ -50,7 +47,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 			return false;
 		}
 		catch(Exception e){
-			throw new YearbookException("Some error occurred while adding Department..");
+			throw new YearbookException("An error occurred while adding a committee member");
 		}
 		return true;
 		
@@ -60,52 +57,63 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	public boolean updateMember(int memberId, String fName, String lName,
 			String designation, int deptId,  String photoUrl) throws YearbookException {
 		
-		Query query = em.createQuery("Update COMMITTEE_MEMBER c WHERE c.MEMBER_ID = :id");
-		int deletedCount = query.setParameter("id", memberId).executeUpdate();	
-		if(deletedCount>0){
+		CommitteeMember member = null;
+		try{
+			member = em.find(CommitteeMember.class, memberId);
+			if(member == null) {
+				throw new YearbookException("No committee member with id " + memberId);
+			}
+			member.setDeptId(deptId);
+			member.setDesignation(designation);
+			member.setfName(fName);
+			member.setlName(lName);
+			if(photoUrl != null || photoUrl != ""){ 
+				member.setPhotoUrl(photoUrl);	
+			}
 			return true;
-		} else {
-			return false;
+		}catch(Exception e) {
+			throw new YearbookException("An error occurred while updating Committee member with id " + memberId);
 		}
 	}
 
 	@Override
 	public boolean deleteMember(int memberId) throws YearbookException {
-		Query query = em.createQuery("DELETE FROM COMMITTEE_MEMBER c WHERE c.MEMBER_ID = :id");
-		int deletedCount = query.setParameter("id", memberId).executeUpdate();	
-		if(deletedCount>0){
+		
+		CommitteeMember member = null;
+		try{
+			member = em.find(CommitteeMember.class, memberId);
+			if(member == null) {
+				throw new YearbookException("No committee member with id " + memberId);
+			}
+			em.remove(member);
 			return true;
-		} else {
-			return false;
+		}catch(Exception e) {
+			throw new YearbookException("An error occurred while deleting Committee member with id " + memberId);
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public CommitteeMember getMember(int memberId) throws YearbookException{
 		
-		List<CommitteeMember> members= null;
-		CommitteeMember  member = null;
-		Query query = em.createNativeQuery
-				("select * from COMMITTEE_MEMBER where MEMBER_ID='" + memberId + "'", CommitteeMember.class);
-
-		members = query.getResultList();
-		if(!members.isEmpty()){
-			member = members.get(0);
+		CommitteeMember member = null;
+		try{
+			member = em.find(CommitteeMember.class, memberId);
+			if(member == null) {
+				throw new YearbookException("No committee member with id " + memberId);
+			}
 			return member;
-		}
-		else {
-			throw new YearbookException("No committee member with id " + memberId);
+		}catch(Exception e) {
+			throw new YearbookException("An error occurred retriving committee member with id " + memberId);
 		}
 	}
 	
-	
-	public Collection<CommitteeMember> getAllCommitteeMembers() throws YearbookException {
-		 Query query = em.createQuery("SELECT c FROM COMMITTEE_MEMBER c");
+	public List<CommitteeMember> getAllCommitteeMembers(int deptId) throws YearbookException {
+		 Query query = em.createQuery("SELECT c FROM COMMITTEE_MEMBER c "
+		 		+ "where c.deptId = deptId").setParameter("deptId", deptId);
 		   try{
-			   return (Collection<CommitteeMember>) query.getResultList();
+			   return query.getResultList();
 		   }
 		   catch (Exception e) {
-			   throw new YearbookException("Error occured while fetching all committee members");
+			   throw new YearbookException("An error occured while fetching all committee members");
 		   }
 	}
 
