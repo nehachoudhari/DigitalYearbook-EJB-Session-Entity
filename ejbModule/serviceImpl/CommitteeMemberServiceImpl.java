@@ -108,7 +108,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	
 	public List<CommitteeMember> getAllCommitteeMembers(int deptId) throws YearbookException {
 		 Query query = em.createQuery("SELECT c FROM CommitteeMember c "
-		 		+ "where c.deptId = deptId").setParameter("deptId", deptId);
+		 		+ "where c.deptId = "+ deptId);
 		   try{
 			   return query.getResultList();
 		   }

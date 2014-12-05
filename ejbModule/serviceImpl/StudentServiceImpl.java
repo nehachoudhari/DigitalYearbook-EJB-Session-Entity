@@ -152,7 +152,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	public List<Student> getAllStudents(int deptId) throws YearbookException {
-		   Query query = em.createQuery("SELECT s FROM Student s where s.deptId = deptId").setParameter("deptId", deptId);
+		   Query query = em.createQuery("SELECT s FROM Student s where s.deptId = " + deptId);
 		   try{
 			   return query.getResultList();
 		   }

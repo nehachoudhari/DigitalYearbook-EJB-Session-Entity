@@ -87,7 +87,7 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 	public List<ResearchGroup> getAllResearchGroups(int deptId) throws YearbookException {
 		
 		 Query query = em.createQuery("SELECT r FROM ResearchGroup r "
-		 		+ "where r.deptId = deptId").setParameter("deptId", deptId);
+		 		+ "where r.deptId = " + deptId);
 		    
 		   try{
 			   return query.getResultList();
