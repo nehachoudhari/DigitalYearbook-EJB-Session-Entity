@@ -1,6 +1,5 @@
 package serviceImpl;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -12,7 +11,6 @@ import javax.validation.ConstraintViolationException;
 
 import service.CommitteeMemberService;
 import entity.CommitteeMember;
-import entity.Department;
 import exception.YearbookException;
 
 
@@ -54,7 +52,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	}
 
 	@Override
-	public boolean updateMember(int memberId, String fName, String lName,
+	public boolean updateMember(long memberId, String fName, String lName,
 			String designation, int deptId,  String photoUrl) throws YearbookException {
 		
 		CommitteeMember member = null;
@@ -77,7 +75,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	}
 
 	@Override
-	public boolean deleteMember(int memberId) throws YearbookException {
+	public boolean deleteMember(long memberId) throws YearbookException {
 		
 		CommitteeMember member = null;
 		try{
