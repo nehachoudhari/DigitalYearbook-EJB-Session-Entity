@@ -54,7 +54,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	}
 
 	@Override
-	public boolean updateMember(int memberId, String fName, String lName,
+	public boolean updateMember(long memberId, String fName, String lName,
 			String designation, int deptId,  String photoUrl) throws YearbookException {
 		
 		CommitteeMember member = null;
@@ -77,7 +77,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 	}
 
 	@Override
-	public boolean deleteMember(int memberId) throws YearbookException {
+	public boolean deleteMember(long memberId) throws YearbookException {
 		
 		CommitteeMember member = null;
 		try{
@@ -106,9 +106,9 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 		}
 	}
 	
-	public List<CommitteeMember> getAllCommitteeMembers(int deptId) throws YearbookException {
-		 Query query = em.createQuery("SELECT c FROM CommitteeMember c "
-		 		+ "where c.deptId = "+ deptId);
+	public List<CommitteeMember> getAllCommitteeMembers() throws YearbookException {
+		 Query query = em.createQuery("SELECT c FROM CommitteeMember c");
+		 	//	+ "where c.deptId = "+ deptId);
 		   try{
 			   return (List<CommitteeMember>) query.getResultList();
 		   

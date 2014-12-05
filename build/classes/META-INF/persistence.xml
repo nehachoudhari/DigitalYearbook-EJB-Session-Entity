@@ -7,7 +7,7 @@
 	   <class>entity.ResearchGroup</class>
 	   <class>entity.Event</class>
 	   <class>entity.CommitteeMember</class>
-	   
+	  
 	   <properties>
 	   
             <property name="hibernate.hbm2ddl.auto" value="update"/>

@@ -147,8 +147,8 @@ public class StudentServiceImpl implements StudentService{
 		
 	}
 
-	public List<Student> getAllStudents(int deptId) throws YearbookException {
-		Query query = em.createQuery("SELECT s FROM Student s where s.deptId = " + deptId);
+	public List<Student> getAllStudents() throws YearbookException {
+		Query query = em.createQuery("SELECT s FROM Student s");//where s.deptId = " + deptId);
 		   try{
 			   return (List<Student>) query.getResultList();
 		   }

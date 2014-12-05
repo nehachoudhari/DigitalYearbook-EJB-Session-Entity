@@ -19,7 +19,7 @@ public interface StudentService{
 	
 	public boolean deleteStudent(long buckId) throws YearbookException;
 	
-	public List<Student> getAllStudents(int deptId) throws YearbookException;
+	public List<Student> getAllStudents() throws YearbookException;
 	
 	public Student login(String username, String password) throws YearbookException;
 

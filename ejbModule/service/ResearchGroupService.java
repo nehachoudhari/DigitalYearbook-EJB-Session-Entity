@@ -16,6 +16,6 @@ public interface ResearchGroupService {
 	
 	public boolean deleteReseachGroup(int groupId) throws YearbookException;
 
-	public List<ResearchGroup> getAllResearchGroups(int deptId) throws YearbookException;
+	public List<ResearchGroup> getAllResearchGroups() throws YearbookException;
 	
 }
