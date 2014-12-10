@@ -90,7 +90,7 @@ public class CommitteeMemberServiceImpl implements CommitteeMemberService{
 		}
 	}
 	
-	public CommitteeMember getMember(int memberId) throws YearbookException{
+	public CommitteeMember getMember(long memberId) throws YearbookException{
 		
 		CommitteeMember member = null;
 		try{

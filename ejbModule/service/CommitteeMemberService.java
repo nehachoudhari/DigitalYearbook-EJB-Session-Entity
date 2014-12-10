@@ -19,5 +19,5 @@ public interface CommitteeMemberService {
 	
 	public List<CommitteeMember> getAllCommitteeMembers() throws YearbookException;
 	
-	public CommitteeMember getMember(int memberId) throws YearbookException;
+	public CommitteeMember getMember(long memberId) throws YearbookException;
 }

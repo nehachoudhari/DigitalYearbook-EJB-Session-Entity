@@ -27,7 +27,7 @@ public class ResearchGroup implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="GROUP_ID")
-	private int groupId;
+	private long groupId;
 	
 	@Column(name="NAME")
 	private String name;
@@ -57,10 +57,10 @@ public class ResearchGroup implements Serializable{
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
 	}
-	public int getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
-	public void setGroupId(int groupId) {
+	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 	public String getName() {

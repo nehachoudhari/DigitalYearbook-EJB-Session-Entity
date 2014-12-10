@@ -102,22 +102,19 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public Student getStudent(long buckId) throws YearbookException{
+		Student student = null;
+		System.out.println("Inside getStudent");
+		Query query = em.createQuery("SELECT s FROM Student s where s.buckId = "+buckId);
 		try{
-			Student student = em.find(Student.class, buckId);
-			
+			System.out.println("Inside getstudent "+buckId);
+			student = (Student)query.getResultList().get(0);//em.find(Student.class, buckId);
+			System.out.println(student);
 			if(student == null){
-				throw new EntityNotFoundException();
+				throw new YearbookException("No student with id " + buckId);
 			}
-			
 			return student;
-		}
-		catch(Exception ex){
-			if (ex.equals(EntityNotFoundException.class)){
-				throw new YearbookException("Student not found with buckId: "+ buckId);
-			}
-			else{
-				throw new YearbookException("Error in retreiving student information, buckID: "+buckId + " message: " + ex.getLocalizedMessage());
-			}
+		}catch(Exception e) {
+			throw new YearbookException("An error occurred retriving student with id " + buckId);
 		}
 		
 	}

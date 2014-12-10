@@ -36,7 +36,7 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 		
 	}
 	
-	public ResearchGroup getResearchGroup(int groupId) throws YearbookException {
+	public ResearchGroup getResearchGroup(long groupId) throws YearbookException {
 		ResearchGroup group = null;
 		try{
 			group = em.find(ResearchGroup.class, groupId);
@@ -49,7 +49,7 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 		}
 	}
 	
-	public boolean updateResearchGroup(int groupId, String name, int deptId, String description, String url, String photoUrl) throws YearbookException{
+	public boolean updateResearchGroup(long groupId, String name, int deptId, String description, String url, String photoUrl) throws YearbookException{
 		ResearchGroup group = null;
 		try{
 			group = em.find(ResearchGroup.class, groupId);
@@ -69,7 +69,7 @@ public class ResearchGroupServiceImpl implements ResearchGroupService{
 		}
 	}
 	
-	public boolean deleteReseachGroup(int groupId) throws YearbookException{
+	public boolean deleteReseachGroup(long groupId) throws YearbookException{
 		ResearchGroup group = null;
 		try{
 			group = em.find(ResearchGroup.class, groupId);
